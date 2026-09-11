@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev":"node --watch src/index.js"
+    "dev": "node --watch src/index.js"
   },
   "keywords": [],
   "type": "module",
   "dependencies": {
+    "@clerk/express": "^2.1.67",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
