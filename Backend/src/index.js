@@ -5,12 +5,11 @@ import cors from "cors"
 import fs from "fs"
 import path from "path"
 import { clerkMiddleware } from "@clerk/express"
-import User from "./models/user.model.js";
 import { connectDB } from "./lib/db.js"
 
 dns.setServers(["8.8.8.8"]);
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT||3001;
 const frontendUrl = process.env.frontendUrl;
 connectDB();
 
