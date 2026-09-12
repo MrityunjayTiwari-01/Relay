@@ -6,6 +6,7 @@ import fs from "fs"
 import path from "path"
 import { clerkMiddleware } from "@clerk/express"
 import { connectDB } from "./lib/db.js"
+import clerkWebhook from "./webhooks/clerk.webhook.js";
 
 dns.setServers(["8.8.8.8"]);
 const app = express();
