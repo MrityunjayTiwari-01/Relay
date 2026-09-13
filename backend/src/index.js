@@ -7,9 +7,12 @@ import path from "path"
 import { clerkMiddleware } from "@clerk/express"
 import { connectDB } from "./lib/db.js"
 import clerkWebhook from "./webhooks/clerk.webhook.js";
+import authRoutes from "./routes/auth.route.js";
+import messageRoutes from "./routes/message.route.js";
+import { app, server } from "./lib/socket.js";
 
 dns.setServers(["8.8.8.8"]);
-const app = express();
+
 const port = process.env.PORT||3001;
 const frontendUrl = process.env.frontendUrl;
 connectDB();
@@ -22,6 +25,8 @@ app.use(express.json());
 app.use(cors({ origin: frontendUrl, Credential: true }));
 app.use(clerkMiddleware());
 
+app.use("/api/auth",authRoutes);
+app.use("/api/messages",messageRoutes);
 
 app.get("/health", (req, res) => {
   res.status(200).json({ ok: true });
@@ -35,7 +40,7 @@ if (fs.existsSync(publicDir)) {
   });
 }
 
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is up and running at port ${port}`)
 }
 );
