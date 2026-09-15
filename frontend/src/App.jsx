@@ -4,10 +4,11 @@ import { WallpaperProvider } from './context/WallpaperContext'
 import {  Navigate, Route, Routes } from 'react-router'
 import ChatPage from './page/ChatPage'
 import AuthPage from './page/AuthPage'
+import PageLoader from './component/PageLoader'
 
 function App() {
-
   const {isSignedIn,isLoaded} = useAuth();
+  if(!isLoaded) return <PageLoader />
   return (
     <>
       <ThemeProvider>
