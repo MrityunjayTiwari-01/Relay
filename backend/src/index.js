@@ -1,6 +1,6 @@
 import express from "express";
 import "dotenv/config"
-import dns from "dns";
+import"./lib/dns.js";
 import cors from "cors"
 import fs from "fs"
 import path from "path"
@@ -11,10 +11,9 @@ import authRoutes from "./routes/auth.route.js";
 import messageRoutes from "./routes/message.route.js";
 import { app, server } from "./lib/socket.js";
 
-dns.setServers(["8.8.8.8"]);
 
-const port = process.env.PORT||3001;
-const frontendUrl = process.env.frontendUrl;
+const port = process.env.PORT||3000;
+const frontendUrl = process.env.FRONTEND_URL;
 connectDB();
 
 const publicDir = path.join(process.cwd(), "public")
@@ -22,7 +21,7 @@ const publicDir = path.join(process.cwd(), "public")
 app.use("/api/webhooks/clerk", express.raw({ type: "application/json" }), clerkWebhook);
 
 app.use(express.json());
-app.use(cors({ origin: frontendUrl, Credential: true }));
+app.use(cors({ origin: frontendUrl, credentials: true }));
 app.use(clerkMiddleware());
 
 app.use("/api/auth",authRoutes);

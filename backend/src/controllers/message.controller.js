@@ -90,13 +90,12 @@ export async function sendMessage(req, res) {
             video: videoUrl
         })
         await newMessage.save();
-
         const receiverSocketId=getReceiverSocketId(receiverId);
         if(receiverSocketId){
-            io.to(receiverId).emmit("newMessage",newMessage)
+            io.to(receiverSocketId).emit("newMessage",newMessage)
         }
         
-        req.status(201).json(newMessage);
+        res.status(201).json(newMessage);
 
     } catch (err) {
         console.error("Error getting Sending message or file:", err.message);

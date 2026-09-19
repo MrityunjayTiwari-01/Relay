@@ -20,12 +20,13 @@ io.on("connection",(socket)=>{
         userSocketMap[userId]=socket.id;
     }
     //it is going to send event to all users the list of online users 
-    io.emmit("getOnlineUsers",Object.keys(userSocketMap))
+    io.emit("getOnlineUsers",Object.keys(userSocketMap))
 
     socket.on("disconnect",()=>{
         if(userId) delete userSocketMap[userId]
-        io.emmit("getOnlineUsers",Object.keys(userSocketMap))
+        io.emit("getOnlineUsers",Object.keys(userSocketMap))
     })
 })
+
 
 export {server,app,io,getReceiverSocketId}
