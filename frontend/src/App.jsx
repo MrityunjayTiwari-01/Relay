@@ -1,5 +1,4 @@
 import { useAuth } from '@clerk/react'
-import { ThemeProvider } from './context/themecontext'
 import { WallpaperProvider } from './context/WallpaperContext'
 import {  Navigate, Route, Routes } from 'react-router'
 import ChatPage from './page/ChatPage'
@@ -8,6 +7,7 @@ import PageLoader from './component/PageLoader'
 import { useAuthStore } from './store/useAuthStore'
 import { useEffect } from 'react'
 import {Toaster} from "react-hot-toast"
+import { ThemeProvider } from './context/ThemeContext'
 
 function App() {
   const {isSignedIn,isLoaded} = useAuth();
